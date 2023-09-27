@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      margin: 0;
+      gap: 12px;
+    }
+    .content {
+      flex: 1 1 100px;
+      cursor: pointer;
+      border: 1px solid black;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <body>
+    <script>
+      document.body.children;
+      let body_content = "";
+      document.body.style.display = "flex";
+      document.body.style.flexDirection = "column";
+
+      for (let i = 0; i < 100; i++) {
+        body_content += `<div class="content"data-origin=${i}>div${i}</div>`;
+      }
+
+      document.body.innerHTML = body_content;
+
+      document.body.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("content")) return;
+        document.body.removeChild(e.target);
+        if (e.target.classList.contains("changed")) {
+          e.target.classList.remove("changed");
+          document.body.insertBefore(
+            e.target,
+            document.body.children[e.target.dataset.origin]
+          );
+        } else {
+          e.target.classList.add("changed");
+          document.body.insertBefore(e.target, document.body.children[0]);
+        }
+      });
+    </script>
+  </body>
+</html>
