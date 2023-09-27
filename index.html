@@ -6,6 +6,7 @@
     <title>Document</title>
   </head>
   <style>
+    /* Added just base styles described in the task */
     body {
       display: flex;
       flex-direction: column;
@@ -25,17 +26,17 @@
   </style>
   <body>
     <script>
+      // I`m not sure about div behavior in case when several divs changed their position and how they should act returning to origin position.
+      // As I understood they have return to origin including changed divs(not after changed part)
+      // Example: 1, 94, 96,0, 2,3 ...  => 94, 1, 96, 0,2,3
       document.body.children;
       let body_content = "";
       document.body.style.display = "flex";
       document.body.style.flexDirection = "column";
-
       for (let i = 0; i < 100; i++) {
-        body_content += `<div class="content"data-origin=${i}>div${i}</div>`;
+        body_content += `<div class="content" data-origin=${i}>div${i}</div>`;
       }
-
       document.body.innerHTML = body_content;
-
       document.body.addEventListener("click", (e) => {
         if (!e.target.classList.contains("content")) return;
         document.body.removeChild(e.target);
